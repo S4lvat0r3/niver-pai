@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Aniversário, Pai!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"> <!-- Fonte do Google Fonts -->
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Pacifico', cursive; /* Usando a nova fonte */
+            overflow: hidden;
+            background-color: #87CEEB; /* Azul clarinho como o céu */
+            position: relative;
+        }
+
+        #content {
+            text-align: center;
+            display: none; /* Inicialmente oculto */
+            position: relative; /* Para manter o vídeo centralizado */
+            z-index: 1; /* Colocar o conteúdo acima do confete */
+        }
+
+        #message {
+            font-size: 4rem; /* Aumentando o tamanho da fonte */
+            color: #333; /* Cor do texto */
+            margin-bottom: 20px;
+        }
+
+        #startButton {
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 100vw; /* Largura total da tela */
+            height: 100vh; /* Altura total da tela */
+            background-image: url('https://pngimg.com/uploads/confetti/confetti_PNG86993.png');
+            background-repeat: no-repeat;
+            background-size: cover; /* Ajusta a imagem para cobrir a área */
+            opacity: 0.8; /* Um pouco transparente para um efeito melhor */
+            animation: fall linear infinite; /* Animação contínua do confete */
+            animation-duration: 5s; /* Duração da animação */
+            pointer-events: none; /* Para permitir que cliques passem através do confete */
+        }
+
+        /* Animação do confete */
+        @keyframes fall {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        iframe {
+            margin-top: 20px;
+            width: 560px;
+            height: 315px;
+        }
+
+        @media (max-width: 768px) {
+            iframe {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button id="startButton" onclick="startCelebration()">Clique aqui para começar a festa!</button>
+
+    <div id="content">
+        <div id="message">Feliz Aniversário, Pai!</div>
+        <iframe id="video" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        function startCelebration() {
+            document.getElementById('startButton').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+            document.getElementById('video').src = "https://www.youtube.com/embed/tShUzHs_oFY";
+
+            // Iniciar confetes continuamente
+            setInterval(createConfetti, 300); // Ajuste a frequência conforme necessário
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random() * 100 + 'vw'; // Posição aleatória na largura da tela
+            confetti.style.animationDuration = Math.random() * 3 + 3 + 's'; // Duração aleatória da animação
+            document.body.appendChild(confetti);
+
+            // Remover o confete após a animação
+            confetti.addEventListener('animationend', () => {
+                confetti.remove();
+            });
+        }
+    </script>
+
+</body>
+</html>
